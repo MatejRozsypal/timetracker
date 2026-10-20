@@ -36,6 +36,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var hotKey: HotKey?
     private var syncTimer: Timer?
     private var sweepWindow: NSWindow?
+    private var homeWindow: NSWindow?
     private var lastNudge: Date?
 
     override init() {
@@ -74,6 +75,35 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             MainActor.assumeIsolated { self?.flush() }
         }
         flush()
+
+        if !UserDefaults.standard.bool(forKey: "didShowWelcome") {
+            UserDefaults.standard.set(true, forKey: "didShowWelcome")
+            openHome()
+        }
+    }
+
+    /// Opening the app again (Spotlight, Finder, Launchpad) while it runs shows the
+    /// home window, so the app is reachable even when the notch hides the menu bar icon.
+    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+        openHome()
+        return false
+    }
+
+    private func openHome() {
+        let view = HomeView(hotkey: HotKey.display(store.config.hotkey)) {
+            MenuView(store: self.store, auth: self.auth, sync: self.sync, monitor: self.monitor, actions: self.menuActions)
+        }
+        if homeWindow == nil {
+            let w = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 380, height: 600),
+                             styleMask: [.titled, .closable], backing: .buffered, defer: false)
+            w.title = "OE Time Log"
+            w.isReleasedWhenClosed = false
+            homeWindow = w
+        }
+        homeWindow?.contentView = NSHostingView(rootView: view)
+        homeWindow?.center()
+        NSApp.activate(ignoringOtherApps: true)
+        homeWindow?.makeKeyAndOrderFront(nil)
     }
 
     // MARK: Triggers

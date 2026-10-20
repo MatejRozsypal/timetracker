@@ -154,6 +154,28 @@ struct MenuActions {
     let reload: () -> Void
 }
 
+// MARK: Home window
+
+/// Shown on first launch and whenever the app is opened again while running.
+struct HomeView<Content: View>: View {
+    let hotkey: String
+    @ViewBuilder let content: () -> Content
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            VStack(alignment: .leading, spacing: 6) {
+                Text("OE Time Log is running").font(.title3.bold())
+                Text("Press \(hotkey) anywhere when you finish something. The app lives in the menu bar as a clock icon. If you cannot see it, the notch is hiding it: quit an icon or two, or just use \(hotkey). Open the app again any time to get back here.")
+                    .font(.callout).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
+            }
+            .padding(14)
+            Divider()
+            content()
+        }
+        .frame(width: 340)
+    }
+}
+
 // MARK: Sweep window
 
 struct SweepView: View {
