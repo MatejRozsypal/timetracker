@@ -1,0 +1,26 @@
+{
+  "clients": [
+    { "code": "oe",  "name": "One Eighty (internal, sales)" },
+    { "code": "dob", "name": "Dobias" },
+    { "code": "man", "name": "Manami" },
+    { "code": "ven", "name": "Venev" },
+    { "code": "eth", "name": "Ethia" },
+    { "code": "raw", "name": "RawBark" },
+    { "code": "jul", "name": "Julca" }
+  ],
+  "activities": [
+    { "code": "strat",  "name": "Strategy and planning",            "bucket": "delivering", "tier": "L3" },
+    { "code": "brief",  "name": "Creative concept and brief",       "bucket": "delivering", "tier": "L3" },
+    { "code": "video",  "name": "Video production",                 "bucket": "delivering", "tier": "L2" },
+    { "code": "static", "name": "Static production (incl. AI)",     "bucket": "delivering", "tier": "L1" },
+    { "code": "meta",   "name": "Meta campaigns",                   "bucket": "delivering", "tier": "L2" },
+    { "code": "google", "name": "Google campaigns",                 "bucket": "delivering", "tier": "L2" },
+    { "code": "email",  "name": "Email (copy, design, publish)",    "bucket": "delivering", "tier": "L1" },
+    { "code": "data",   "name": "Analytics and reporting",          "bucket": "delivering", "tier": "L2" },
+    { "code": "comms",  "name": "Client communication",             "bucket": "delivering", "tier": "L2" },
+    { "code": "web",    "name": "Web, CRO, pricing",                "bucket": "delivering", "tier": "L2" },
+    { "code": "sales",  "name": "Sales and outbound",               "bucket": "promoting",  "tier": "L3" },
+    { "code": "build",  "name": "Internal: Second Brain, tools",    "bucket": "building",   "tier": "L1" },
+    { "code": "admin",  "name": "Internal: admin",                  "bucket": "admin",      "tier": "L0" }
+  ]
+}
